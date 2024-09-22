@@ -26,8 +26,8 @@ const getUserInputStep2 = async () => {
     const salt = await bcrypt.genSalt(10);
     await adminModel.create({
         name: "Админ",
-        login: 'demo',
-        password: await bcrypt.hash("demo", salt),
+        login: 'mvp',
+        password: await bcrypt.hash("mvp", salt),
         role: 'admin'
     })
     console.log('Create Super User...')
