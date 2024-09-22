@@ -79,16 +79,12 @@
     <transition name="notify" :duration="10000">
       <notify :text="error3m" @close="error3 = false" typeModal="error" :code="(ercode || 122)" v-if="error3" />
     </transition>
-    <transition name="modal" :duration="1000">
-      <modalBase @modalShow="modalShow" v-if="modalBase" />
-    </transition>
   </div>
 </template>
 
 <script>
 import sidebar from "../assets/sidebar.json";
 import Select from "../components/select.vue";
-import modalBase from "../components/modals/modalBase.vue";
 export default {
   name: 'App',
   data() {
@@ -120,11 +116,9 @@ export default {
       error3: false,
       saveMe: false,
       openModal: false,
-      modalBase: false,
     };
   },
   components: {
-    modalBase,
     Select
   },
   methods: {
@@ -196,10 +190,6 @@ export default {
       }
 
       return verifySecret
-    },
-
-    modalShow() {
-      this.modalBase = false;
     },
     async loginFunc(data) {
       await this.$axios.post("/login", data).then(async (res) => {
@@ -286,14 +276,6 @@ export default {
       });
     },
     async submit() {
-      // if (
-      //   this.username == "electron_base_url" &&
-      //   this.password == "change_base_url"
-      // ) {
-      //   this.modalBase = true;
-      //   this.username = null
-      //   this.password = null
-      // } else {
       if (this.module != 'electricity_meter') {
         this.ercode = 130
         this.error3m = this.$locale['moduleError'][this.$i18n.locale.value];
@@ -322,7 +304,6 @@ export default {
           }, 5000);
         });
       }
-      // }
     },
   },
   mounted() {
